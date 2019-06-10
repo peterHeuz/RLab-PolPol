@@ -4,7 +4,7 @@ import pandas as pd
 import pdb
 from datetime import datetime
 
-xml_path = "data/articles-training-byarticle-20181122.xml"
+xml_path = "data_semeval/articles-training-byarticle-20181122.xml"
 # with open(xsd_path) as xsd_file
 # 	xmlschema_doc = etree.parse(f)
 # 	xmlschema = etree.XMLSchema(xmlschema_doc)
@@ -16,7 +16,6 @@ df = pd.DataFrame(columns=["id", "title", "published", "text"])
 for child in root :
 	text = "".join(child.itertext())
 	_id = int(child.attrib["id"])
-	# TODO convert to datetime
 	try:
 		published = child.attrib["published-at"]
 	except KeyError:
@@ -27,6 +26,9 @@ for child in root :
 				str(_id), " articles processed")
 	df.loc[len(df)] = [_id, title, published, text]
 
-df.to_csv("data/articles-training-byarticle-20181122.csv")
-	# 	xml_parsed = etree.XML(xml_f, parser)
+df["published"] = df["published"].apply(lambda x: datetime.strptime(x, '%Y-%m-%d') if not pd.isnull(x) else None)
+pdb.set_trace()
+df.loc[df['text'].str[:1] == "\n", 'text'] = df['text'].str[1:]
+
+df.to_csv("data_semeval/articles-training-byarticle-20181122.csv")
 
