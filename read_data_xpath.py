@@ -4,7 +4,7 @@ import pandas as pd
 import pdb
 from datetime import datetime
 
-xml_path = "data_semeval/articles-training-bypublisher-20181122.xml"
+xml_path = "data/articles-training-byarticle-20181122.xml"
 # with open(xsd_path) as xsd_file
 # 	xmlschema_doc = etree.parse(f)
 # 	xmlschema = etree.XMLSchema(xmlschema_doc)
@@ -27,6 +27,6 @@ for child in root :
 				str(_id), " articles processed")
 	df.loc[len(df)] = [_id, title, published, text]
 
-df.to_csv("data_semeval/articles-training-bypublisher-20181122.csv")
+df.to_csv("data/articles-training-byarticle-20181122.csv")
 	# 	xml_parsed = etree.XML(xml_f, parser)
 
