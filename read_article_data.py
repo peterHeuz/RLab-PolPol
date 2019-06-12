@@ -31,4 +31,3 @@ df.loc[df['text'].str[:1] == "\n", 'text'] = df['text'].str[1:]
 
 df.to_csv("data_semeval/articles-training-byarticle-20181122.csv")
 
-
