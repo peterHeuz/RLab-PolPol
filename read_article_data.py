@@ -1,7 +1,5 @@
-from lxml import etree
 import xml.etree.ElementTree as ET
 import pandas as pd
-import pdb
 from datetime import datetime
 
 xml_path = "data_semeval/articles-training-byarticle-20181122.xml"
@@ -26,8 +24,9 @@ for child in root :
 				str(_id), " articles processed")
 	df.loc[len(df)] = [_id, title, published, text]
 
+# converts published column to timestamps
 df["published"] = df["published"].apply(lambda x: datetime.strptime(x, '%Y-%m-%d') if not pd.isnull(x) else None)
-pdb.set_trace()
+# removes leading /n s
 df.loc[df['text'].str[:1] == "\n", 'text'] = df['text'].str[1:]
 
 df.to_csv("data_semeval/articles-training-byarticle-20181122.csv")
