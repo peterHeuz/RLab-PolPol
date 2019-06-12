@@ -25,8 +25,8 @@ def main(file_path):
 
 	# converts published column to timestamps
 	df["published"] = df["published"].apply(lambda x: datetime.strptime(x, '%Y-%m-%d') if not pd.isnull(x) else None)
-	# removes leading /n s
-	df.loc[df['text'].str[:1] == "\n", 'text'] = df['text'].str[1:]
+	# removes all line breaks
+	df["text"] = df["text"].apply(lambda x: x.replace("\n", " "))
 
 	df.to_csv("data_semeval/" + file_path + ".csv")
 
