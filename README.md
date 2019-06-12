@@ -6,3 +6,6 @@ Set up a data directory with the SemEval dataset in a folder `data_semeval` (you
 
 ### Assumptions
 - HTML formatting tags are ignored (e.g.`<p>` ,`<a href ..>...</a>`) and the raw text of the article is used
+
+### Ideas for Improvements
+- use domain name of article as feature
